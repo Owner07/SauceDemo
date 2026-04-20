@@ -48,6 +48,12 @@ public class LocatorTest {
         driver.findElement(By.cssSelector("[id^='add-to-cart']"));
         driver.findElement(By.cssSelector("[id$='backpack']"));
         driver.findElement(By.cssSelector("[id*='sauce']"));
+        driver.findElement(By.xpath("//button[@class='btn btn_primary btn_small btn_inventory ']"));
+        driver.findElement(By.xpath("//div[text()='Sauce Labs Fleece Jacket']"));
+        driver.findElement(By.xpath("//div[contains(@data-test, 'inventory-item')]"));
+        driver.findElement(By.xpath("//div[contains(text(), 'desired state')]"));
+        driver.findElement(By.xpath("//div[contains(@class, 'item') and @data-test = 'inventory-item-name']"));
+
     }
     @AfterMethod
     public void quit(){
