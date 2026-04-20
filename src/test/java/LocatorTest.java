@@ -52,8 +52,12 @@ public class LocatorTest {
         driver.findElement(By.xpath("//div[text()='Sauce Labs Fleece Jacket']"));
         driver.findElement(By.xpath("//div[contains(@data-test, 'inventory-item')]"));
         driver.findElement(By.xpath("//div[contains(text(), 'desired state')]"));
-        driver.findElement(By.xpath("//div[contains(@class, 'item') and @data-test = 'inventory-item-name']"));
-
+        driver.findElement(By.xpath("//div[contains(@class, 'item') and @data-test='inventory-item-name']"));
+        driver.findElement(By.xpath("//div[contains(text(), 'T-Shirt')]//ancestor::div[@class='inventory_item']"));
+        driver.findElement(By.xpath("//div[@class = 'inventory_item_img']//descendant::a[@id='item_0_img_link']"));
+        driver.findElement(By.xpath("//div[contains(text(), 'T-Shirt')]/following::div[@data-test='inventory-item-price']"));
+        driver.findElement(By.xpath("//div[@data-test='inventory-item-name']/parent::a/parent::div"));
+        driver.findElements(By.xpath("//div[@data-test='inventory-item-name']/preceding::div[@data-test='inventory-item-name']"));
     }
     @AfterMethod
     public void quit(){

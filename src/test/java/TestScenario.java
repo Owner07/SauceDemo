@@ -26,10 +26,10 @@ public class TestScenario {
         SoftAssert softAssert = new SoftAssert();
         driver = new ChromeDriver(options);
         driver.get("https://www.saucedemo.com/");
-        String q = "standard_user";
+        String a = "standard_user";
         String w = "secret_sauce";
         WebElement user = driver.findElement(By.name("user-name"));
-        user.sendKeys(q);
+        user.sendKeys(a);
         WebElement pass = driver.findElement(By.name("password"));
         pass.sendKeys(w);
         driver.findElement(By.id("login-button")).click();
