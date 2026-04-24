@@ -8,20 +8,13 @@ import org.testng.asserts.SoftAssert;
 
 public class TestScenario extends BaseTest{
 
-    WebDriver driver;
     SoftAssert softAssert = new SoftAssert();
 
     @Test
     public void scenario() {
 
-        driver.get("https://www.saucedemo.com/");
-        String a = "standard_user";
-        String w = "secret_sauce";
-        WebElement user = driver.findElement(By.name("user-name"));
-        user.sendKeys(a);
-        WebElement pass = driver.findElement(By.name("password"));
-        pass.sendKeys(w);
-        driver.findElement(By.id("login-button")).click();
+        loginPage.open();
+        loginPage.login("standard_user","secret_sauce");
         driver.findElement(By.cssSelector("#add-to-cart-sauce-labs-bolt-t-shirt")).click();
         driver.findElement(By.cssSelector(".shopping_cart_link")).click();
         String name = driver.findElement(By.cssSelector("[data-test=inventory-item-name]")).getText();
