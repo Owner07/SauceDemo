@@ -6,6 +6,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import pages.LoginPage;
+import pages.ProductsPage;
 
 import java.util.HashMap;
 
@@ -13,6 +14,7 @@ public class BaseTest {
 
     WebDriver driver;
     LoginPage loginPage;
+    ProductsPage productsPage;
 
     @BeforeMethod
     public void setUP(){
@@ -27,6 +29,7 @@ public class BaseTest {
         options.addArguments("--disable-infobars");
         driver = new ChromeDriver(options);
         loginPage = new LoginPage(driver);
+        productsPage = new ProductsPage(driver);
     }
 
     @AfterMethod (alwaysRun = true)
