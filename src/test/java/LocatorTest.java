@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import java.util.HashMap;
 
 public class LocatorTest {
+
     WebDriver driver;
 
     @Test
@@ -59,6 +60,7 @@ public class LocatorTest {
         driver.findElement(By.xpath("//div[@data-test='inventory-item-name']/parent::a/parent::div"));
         driver.findElements(By.xpath("//div[@data-test='inventory-item-name']/preceding::div[@data-test='inventory-item-name']"));
     }
+
     @AfterMethod
     public void quit(){
         if(driver != null){

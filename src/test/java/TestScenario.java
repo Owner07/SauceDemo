@@ -10,6 +10,7 @@ import org.testng.asserts.SoftAssert;
 import java.util.HashMap;
 
 public class TestScenario {
+
     WebDriver driver;
 
     @Test
