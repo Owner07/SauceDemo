@@ -3,12 +3,10 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class LoginPage {
-
-    WebDriver driver;
+public class LoginPage extends BasePage{
 
     public LoginPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     private final By USERNAME_FIELD = By.cssSelector("[id=user-name]");
@@ -17,7 +15,7 @@ public class LoginPage {
     private final By ERROR_MASSAGE = By.cssSelector("[data-test=error]");
 
     public void open(){
-        driver.get("https://www.saucedemo.com/");
+        driver.get(BASE_URL);
     }
 
     public void login(String user, String password) {
