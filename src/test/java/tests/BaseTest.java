@@ -5,6 +5,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.asserts.SoftAssert;
 import pages.LoginPage;
 import pages.ProductsPage;
 
@@ -15,6 +16,7 @@ public class BaseTest {
     WebDriver driver;
     LoginPage loginPage;
     ProductsPage productsPage;
+    SoftAssert softAssert;
 
     @BeforeMethod
     public void setUP(){
@@ -32,8 +34,13 @@ public class BaseTest {
         productsPage = new ProductsPage(driver);
     }
 
-    @AfterMethod (alwaysRun = true)
-    public void tearDown() {
-        driver.quit();
+    public void loginGood(){
+        loginPage.open();
+        loginPage.login("standard_user","secret_sauce");
     }
+
+//    @AfterMethod (alwaysRun = true)
+//    public void tearDown() {
+//        driver.quit();
+//    }
 }

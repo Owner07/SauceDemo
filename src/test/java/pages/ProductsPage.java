@@ -13,6 +13,8 @@ public class ProductsPage extends BasePage{
     private final By BUTTON_ADD = By.cssSelector("[data-test^='add-to-cart']");
     private final By BUTTON_DEL = By.cssSelector("[data-test^='remove']");
     private final By BADGE = By.cssSelector("[data-test='shopping-cart-link']");
+    private final By BUTTON_BACK = By.cssSelector("[id='back-to-products']");
+    private final By BUTTON_BACK_IN_BADGE = By.cssSelector("[id='continue-shopping']");
 
 
 
@@ -28,14 +30,33 @@ public class ProductsPage extends BasePage{
     return driver.findElements(PRODUCT).size();
     }
 
-    public void addProduct(int i) {
+    public void clickProduct(int i) {
         List<WebElement> items = driver.findElements(PRODUCT);
-        items.get(i).findElement(BUTTON_ADD).click();
+        items.get(i).click();
+    }
+
+    public String buttonBackToProduct() {
+        return driver.findElement(BUTTON_BACK).getText();
+    }
+    public String buttonAdd() {
+        return driver.findElement(BUTTON_ADD).getText();
+    }
+
+    public void clicklButtonAdd() {
+        driver.findElement(BUTTON_ADD).click();
+    }
+
+    public String buttonDel() {
+        return driver.findElement(BUTTON_DEL).getText();
+    }
+
+    public void clicklButtomDel() {
+        driver.findElement(BUTTON_DEL).click();
     }
 
     public void delProduct(int i) {
         List<WebElement> items = driver.findElements(PRODUCT);
-        items.get(i).findElement(BUTTON_DEL).click();
+        items.get(i).findElement(BUTTON_ADD).click();
     }
 
     public String getCountBadge(){
@@ -43,4 +64,19 @@ public class ProductsPage extends BasePage{
         return badge.isDisplayed() ? badge.getText() : "0";
     }
 
+    public void clickBadge() {
+        driver.findElement(BADGE).click();
+    }
+
+    public String getButtonBackBadge() {
+        return driver.findElement(BUTTON_BACK_IN_BADGE).getText();
+    }
+
+    public String getAddButtonText(int index) {
+        return driver.findElements(BUTTON_ADD).get(index).getText();
+    }
+
+    public String getRemoveButtonText(int index) {
+        return driver.findElements(BUTTON_DEL).get(index).getText();
+    }
 }
