@@ -71,6 +71,8 @@ public class ProductsPage extends BasePage{
         return driver.findElement(BUTTON_BACK_IN_BADGE).getText();
     }
 
+
+
     public void delProduct() {
         driver.findElement(BUTTON_DEL).click();
     }

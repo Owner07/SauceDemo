@@ -6,6 +6,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.asserts.SoftAssert;
+import pages.CartPage;
 import pages.LoginPage;
 import pages.ProductsPage;
 
@@ -16,7 +17,7 @@ public class BaseTest {
     WebDriver driver;
     LoginPage loginPage;
     ProductsPage productsPage;
-    SoftAssert softAssert;
+    CartPage cartPage;
 
     @BeforeMethod
     public void setUP(){
@@ -32,11 +33,20 @@ public class BaseTest {
         driver = new ChromeDriver(options);
         loginPage = new LoginPage(driver);
         productsPage = new ProductsPage(driver);
+        cartPage = new CartPage(driver);
     }
 
-    public void loginGood(){
+    public void loginGood() {
         loginPage.open();
         loginPage.login("standard_user","secret_sauce");
+    }
+
+    public void inCart() {
+        productsPage.clickBadge();
+    }
+
+    public void addProdBase() {
+        productsPage.clicklButtonAdd();
     }
 
     @AfterMethod (alwaysRun = true)
