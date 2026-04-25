@@ -15,6 +15,8 @@ public class ProductsPage extends BasePage{
     private final By BADGE = By.cssSelector("[data-test='shopping-cart-link']");
     private final By BUTTON_BACK = By.cssSelector("[id='back-to-products']");
     private final By BUTTON_BACK_IN_BADGE = By.cssSelector("[id='continue-shopping']");
+    private final By BUTTON_ADD_PAGE = By.cssSelector(".btn_inventory");
+    private final By BUTTON_DEL_PAGE = By.cssSelector("");
 
 
 
@@ -54,9 +56,9 @@ public class ProductsPage extends BasePage{
         driver.findElement(BUTTON_DEL).click();
     }
 
-    public void delProduct(int i) {
-        List<WebElement> items = driver.findElements(PRODUCT);
-        items.get(i).findElement(BUTTON_ADD).click();
+    public void addProduct(int i) {
+        List<WebElement> items = driver.findElements(BUTTON_ADD_PAGE);
+        items.get(i).click();
     }
 
     public String getCountBadge(){
@@ -72,11 +74,7 @@ public class ProductsPage extends BasePage{
         return driver.findElement(BUTTON_BACK_IN_BADGE).getText();
     }
 
-    public String getAddButtonText(int index) {
-        return driver.findElements(BUTTON_ADD).get(index).getText();
-    }
-
-    public String getRemoveButtonText(int index) {
-        return driver.findElements(BUTTON_DEL).get(index).getText();
+    public void delProduct() {
+        driver.findElement(BUTTON_DEL).click();
     }
 }

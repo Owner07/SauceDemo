@@ -50,6 +50,10 @@ public class ProductTest extends BaseTest{
     @Test
     public void getCountBadges() {
         loginGood();
-        productsPage.delProduct(1);
+        productsPage.addProduct(1);
+        productsPage.addProduct(2);
+        productsPage.addProduct(0);
+        productsPage.delProduct();
+        Assert.assertEquals(productsPage.getCountBadge(),"2");
     }
 }
