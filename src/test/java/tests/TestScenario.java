@@ -10,7 +10,6 @@ public class TestScenario extends BaseTest{
 
     @Test
     public void scenario() {
-
         loginPage.open();
         loginPage.login("standard_user","secret_sauce");
         driver.findElement(By.cssSelector("#add-to-cart-sauce-labs-bolt-t-shirt")).click();
