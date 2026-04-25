@@ -16,9 +16,6 @@ public class ProductsPage extends BasePage{
     private final By BUTTON_BACK = By.cssSelector("[id='back-to-products']");
     private final By BUTTON_BACK_IN_BADGE = By.cssSelector("[id='continue-shopping']");
     private final By BUTTON_ADD_PAGE = By.cssSelector(".btn_inventory");
-    private final By BUTTON_DEL_PAGE = By.cssSelector("");
-
-
 
     public ProductsPage(WebDriver driver) {
         super(driver);

@@ -39,8 +39,8 @@ public class BaseTest {
         loginPage.login("standard_user","secret_sauce");
     }
 
-//    @AfterMethod (alwaysRun = true)
-//    public void tearDown() {
-//        driver.quit();
-//    }
+    @AfterMethod (alwaysRun = true)
+    public void tearDown() {
+        driver.quit();
+    }
 }
