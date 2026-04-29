@@ -26,7 +26,7 @@ public class LoginTest extends BaseTest{
         };
     }
 
-    @Test (dataProvider = "Тестовые данные для негативного логина",testName = "Негативный логин",
+    @Test (dataProvider = "Тестовые данные для негативного логина",testName = "Негативный логин ",
             description = "Ввод невалидный значений с помощью метода датапровайдер")
     public void negativeLogin(String user, String password, String errorMessage) {
         getLoginPage().open();
