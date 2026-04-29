@@ -1,6 +1,5 @@
 package tests;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
@@ -31,9 +30,7 @@ public class BaseTest {
 
         ChromeDriver driver = new ChromeDriver(options);
 
-        // СОХРАНЯЕМ в ThreadLocal через DriverManager
         DriverManager.setDriver(driver);
-
         // создаем page objects и сохраняем в ThreadLocal
         loginPage.set(new LoginPage(driver));
         productsPage.set(new ProductsPage(driver));

@@ -53,6 +53,7 @@ public class ProductTest extends BaseTest{
         getProductsPage().clickBadge();
         Assert.assertEquals(getProductsPage().getButtonBackBadge(),"Continue Shopping");
     }
+
     @Test (testName = "Проверка добавления продуктов в корзину"
             ,description = "Успешный логин и проверка что 3 продукта добавились и один удалился из корзины")
     public void getCountBadges() {

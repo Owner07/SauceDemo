@@ -1,8 +1,6 @@
 package tests;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 public class LocatorTest extends BaseTest{
@@ -10,10 +8,8 @@ public class LocatorTest extends BaseTest{
     @Test (testName = "Чек локаторов",
     description = "Успешный логин + проверка локаторов")
     public void checkLocator() {
-
         getLoginPage().open();
         getLoginPage().login("standard_user","secret_sauce");
-
         DriverManager.getDriver().findElement(By.cssSelector("[data-test='inventory-item-name']"));
         DriverManager.getDriver().findElement(By.cssSelector("[class~='btn']"));
         DriverManager.getDriver().findElement(By.cssSelector("[id|='add-to-cart']"));
