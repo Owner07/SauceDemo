@@ -5,22 +5,20 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.asserts.SoftAssert;
 import pages.CartPage;
 import pages.LoginPage;
 import pages.ProductsPage;
-
 import java.util.HashMap;
 
 public class BaseTest {
 
-    WebDriver driver;
-    LoginPage loginPage;
-    ProductsPage productsPage;
-    CartPage cartPage;
+    // каждый поток имеет будет брать экземпляр LoginPage
+    private ThreadLocal<LoginPage> loginPage = new ThreadLocal<>();
+    private ThreadLocal<ProductsPage> productsPage = new ThreadLocal<>();
+    private ThreadLocal<CartPage> cartPage = new ThreadLocal<>();
 
     @BeforeMethod
-    public void setUP(){
+    public void setUP() {
         ChromeOptions options = new ChromeOptions();
         HashMap<String, Object> chromePrefs = new HashMap<>();
         chromePrefs.put("credentials_enable_service", false);
@@ -30,27 +28,45 @@ public class BaseTest {
         options.addArguments("--disable-notifications");
         options.addArguments("--disable-popup-blocking");
         options.addArguments("--disable-infobars");
-        driver = new ChromeDriver(options);
-        loginPage = new LoginPage(driver);
-        productsPage = new ProductsPage(driver);
-        cartPage = new CartPage(driver);
+
+        ChromeDriver driver = new ChromeDriver(options);
+
+        // СОХРАНЯЕМ в ThreadLocal через DriverManager
+        DriverManager.setDriver(driver);
+
+        // создаем page objects и сохраняем в ThreadLocal
+        loginPage.set(new LoginPage(driver));
+        productsPage.set(new ProductsPage(driver));
+        cartPage.set(new CartPage(driver));
+    }
+
+    @AfterMethod(alwaysRun = true)
+    public void tearDown() {
+        DriverManager.quitDriver();  // Закрываем драйвер текущего потока
+    }
+
+    protected LoginPage getLoginPage() {
+        return loginPage.get();
+    }
+
+    protected ProductsPage getProductsPage() {
+        return productsPage.get();
+    }
+
+    protected CartPage getCartPage() {
+        return cartPage.get();
     }
 
     public void loginGood() {
-        loginPage.open();
-        loginPage.login("standard_user","secret_sauce");
+        getLoginPage().open();
+        getLoginPage().login("standard_user", "secret_sauce");
     }
 
     public void inCart() {
-        productsPage.clickBadge();
+        getProductsPage().clickBadge();
     }
 
     public void addProdBase() {
-        productsPage.clicklButtonAdd();
-    }
-
-    @AfterMethod (alwaysRun = true)
-    public void tearDown() {
-        driver.quit();
+        getProductsPage().clicklButtonAdd();
     }
 }

@@ -8,52 +8,52 @@ public class ProductTest extends BaseTest{
     @Test
     public void checkPage(){
         loginGood();
-        Assert.assertEquals(productsPage.getTitle(),"Products");
+        Assert.assertEquals(getProductsPage().getTitle(),"Products");
     }
 
     @Test
     public void checkCountProducts() {
         loginGood();
-        Assert.assertEquals(productsPage.getItemCount(),6);
+        Assert.assertEquals(getProductsPage().getItemCount(),6);
     }
 
     @Test
     public void clickToProducts() {
         loginGood();
-        productsPage.clickProduct(1);
-        Assert.assertEquals(productsPage.buttonBackToProduct(),"Back to products");
+        getProductsPage().clickProduct(1);
+        Assert.assertEquals(getProductsPage().buttonBackToProduct(),"Back to products");
     }
 
     @Test
     public void addProduct() {
     loginGood();
-    productsPage.clickProduct(2);
-    productsPage.clicklButtonAdd();
-    Assert.assertEquals(productsPage.buttonDel(),"Remove");
+    getProductsPage().clickProduct(2);
+    getProductsPage().clicklButtonAdd();
+    Assert.assertEquals(getProductsPage().buttonDel(),"Remove");
     }
 
     @Test
     public void delProduct() {
         loginGood();
-        productsPage.clickProduct(4);
-        productsPage.clicklButtonAdd();
-        productsPage.clicklButtomDel();
-        Assert.assertEquals(productsPage.buttonAdd(),"Add to cart");
+        getProductsPage().clickProduct(4);
+        getProductsPage().clicklButtonAdd();
+        getProductsPage().clicklButtomDel();
+        Assert.assertEquals(getProductsPage().buttonAdd(),"Add to cart");
     }
 
     @Test
     public void clickToBadge() {
         loginGood();
-        productsPage.clickBadge();
-        Assert.assertEquals(productsPage.getButtonBackBadge(),"Continue Shopping");
+        getProductsPage().clickBadge();
+        Assert.assertEquals(getProductsPage().getButtonBackBadge(),"Continue Shopping");
     }
     @Test
     public void getCountBadges() {
         loginGood();
-        productsPage.addProduct(1);
-        productsPage.addProduct(2);
-        productsPage.addProduct(0);
-        productsPage.delProduct();
-        Assert.assertEquals(productsPage.getCountBadge(),"2");
+        getProductsPage().addProduct(1);
+        getProductsPage().addProduct(2);
+        getProductsPage().addProduct(0);
+        getCartPage().delProduct();
+        Assert.assertEquals(getProductsPage().getCountBadge(),"2");
     }
 }
