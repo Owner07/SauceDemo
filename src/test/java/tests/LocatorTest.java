@@ -7,7 +7,8 @@ import org.testng.annotations.Test;
 
 public class LocatorTest extends BaseTest{
 
-    @Test
+    @Test (testName = "Чек локаторов",
+    description = "Успешный логин + проверка локаторов")
     public void checkLocator() {
 
         getLoginPage().open();

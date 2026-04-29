@@ -17,7 +17,7 @@ public class BaseTest {
     private ThreadLocal<ProductsPage> productsPage = new ThreadLocal<>();
     private ThreadLocal<CartPage> cartPage = new ThreadLocal<>();
 
-    @BeforeMethod
+    @BeforeMethod (description = "Настройки для драйвера")
     public void setUP() {
         ChromeOptions options = new ChromeOptions();
         HashMap<String, Object> chromePrefs = new HashMap<>();
@@ -40,7 +40,7 @@ public class BaseTest {
         cartPage.set(new CartPage(driver));
     }
 
-    @AfterMethod(alwaysRun = true)
+    @AfterMethod(alwaysRun = true, description = "Обязательное закрытие драйвера")
     public void tearDown() {
         DriverManager.quitDriver();  // Закрываем драйвер текущего потока
     }

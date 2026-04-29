@@ -9,7 +9,8 @@ TestScenario extends BaseTest{
 
     SoftAssert softAssert = new SoftAssert();
 
-    @Test
+    @Test (testName = "Сценарий добавления продукта в корзину",
+            description = "Логин,добавление продукта в корзину, переход в корзину, проверка стоимости продукта.")
     public void scenario() {
         getLoginPage().open();
         getLoginPage().login("standard_user","secret_sauce");

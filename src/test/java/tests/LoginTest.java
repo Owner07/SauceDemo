@@ -8,7 +8,10 @@ import static org.testng.Assert.assertEquals;
 
 public class LoginTest extends BaseTest{
 
-    @Test(invocationCount = 3, threadPoolSize = 3)
+    @Test(testName = "Позитивный логин",
+            invocationCount = 3,
+            threadPoolSize = 3,
+    description = "Логин с валидными кредами")
     public void checkLoginWithPositive() {
         getLoginPage().open();
         getLoginPage().login("standard_user","secret_sauce");
@@ -24,7 +27,8 @@ public class LoginTest extends BaseTest{
         };
     }
 
-    @Test (dataProvider = "Тестовые данные для негативного логина")
+    @Test (dataProvider = "Тестовые данные для негативного логина",testName = "Негативный логин",
+            description = "Ввод невалидный значений с помощью метода датапровайдер")
     public void negativeLogin(String user, String password, String errorMessage) {
         getLoginPage().open();
         getLoginPage().login(user, password);
