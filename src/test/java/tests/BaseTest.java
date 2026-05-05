@@ -4,17 +4,17 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Optional;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 import pages.CartPage;
 import pages.LoginPage;
 import pages.ProductsPage;
+import utils.DriverManager;
+import utils.TestListener;
+
 import java.util.HashMap;
 
+@Listeners({TestListener.class})
 public class BaseTest {
-
     // каждый поток имеет будет брать экземпляр LoginPage
     private ThreadLocal<LoginPage> loginPage = new ThreadLocal<>();
     private ThreadLocal<ProductsPage> productsPage = new ThreadLocal<>();

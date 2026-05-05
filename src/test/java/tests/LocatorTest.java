@@ -2,6 +2,7 @@ package tests;
 
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
+import utils.DriverManager;
 
 public class LocatorTest extends BaseTest{
 

@@ -3,6 +3,7 @@ package tests;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+import utils.DriverManager;
 
 public class
 TestScenario extends BaseTest{
