@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.*;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -11,6 +12,14 @@ public class LoginTest extends BaseTest{
             invocationCount = 3,
             threadPoolSize = 3,
     description = "Логин с валидными кредами")
+    @Description ("Проверка логина с валидными кредами")
+    @Epic("E2E")
+    @Feature("Логин в SauceDemo")
+    @Story("Позитивный логин")
+    @Severity(SeverityLevel.CRITICAL)
+    @TmsLink("PL")
+    @Issue("PL-B")
+    @Owner("Вейт Владимир")
     public void checkLoginWithPositive() {
         getLoginPage().open();
         getLoginPage().login("standard_user","secret_sauce");
@@ -25,7 +34,14 @@ public class LoginTest extends BaseTest{
                 {"test", "test", "Epic sadface: Username and password do not match any user in this service"}
         };
     }
-
+    @Description ("Проверка логина с не валидными кредами")
+    @Epic("E2E")
+    @Feature("Логин в SauceDemo негатив")
+    @Story("Негативный логин")
+    @Severity(SeverityLevel.NORMAL)
+    @TmsLink("NL")
+    @Issue("NL-B")
+    @Owner("Вейт Владимир")
     @Test (dataProvider = "Тестовые данные для негативного логина",testName = "Негативный логин ",
             description = "Ввод невалидный значений с помощью метода датапровайдер")
     public void negativeLogin(String user, String password, String errorMessage) {
