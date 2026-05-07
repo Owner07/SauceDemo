@@ -18,7 +18,7 @@ public class ProductTest extends BaseTest{
     @Owner("Вейт Владимир")
     public void checkPage(){
         loginGood();
-        Assert.assertEquals(getProductsPage().getTitle(),"Products");
+        Assert.assertEquals(getProductsPage().getTitle(),"Productse");
     }
 
     @Test (testName = "Количество продуктов"

@@ -1,20 +1,24 @@
 package tests;
 
 import io.qameta.allure.*;
+import io.qameta.allure.testng.AllureTestNg;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
+import org.testng.ITestContext;
+import org.testng.ITestResult;
 import org.testng.annotations.*;
 import pages.CartPage;
 import pages.LoginPage;
 import pages.ProductsPage;
+import utils.AllureUtils;
 import utils.DriverManager;
 import utils.TestListener;
 
 import java.util.HashMap;
 
-@Listeners({TestListener.class})
+@Listeners({TestListener.class, AllureTestNg.class})
 public class BaseTest {
     // каждый поток имеет будет брать экземпляр LoginPage
     private ThreadLocal<LoginPage> loginPage = new ThreadLocal<>();
@@ -28,7 +32,7 @@ public class BaseTest {
     @Story("Инициализация + опции")
     @Severity(SeverityLevel.CRITICAL)
     @Owner("Вейт Владимир")
-    public void setUP(@Optional("chrome") String browser) {
+    public void setUP(@Optional("chrome") String browser, ITestContext iTestContext) {
         if(browser.equalsIgnoreCase("chrome")) {
             ChromeOptions options = new ChromeOptions();
             HashMap<String, Object> chromePrefs = new HashMap<>();
@@ -45,6 +49,7 @@ public class BaseTest {
             loginPage.set(new LoginPage(driver));
             productsPage.set(new ProductsPage(driver));
             cartPage.set(new CartPage(driver));
+            iTestContext.setAttribute("driver", driver);
         } else if (browser.equalsIgnoreCase("edge")) {
             EdgeOptions options1 = new EdgeOptions();
             HashMap<String, Object> edgePrefs = new HashMap<>();
@@ -61,12 +66,16 @@ public class BaseTest {
             loginPage.set(new LoginPage(driver1));
             productsPage.set(new ProductsPage(driver1));
             cartPage.set(new CartPage(driver1));
+            iTestContext.setAttribute("driver", driver1);
         }
     }
 
     @AfterMethod(alwaysRun = true, description = "Обязательное закрытие драйвера")
-    public void tearDown() {
-        DriverManager.quitDriver();  // Закрываем драйвер текущего потока
+    public void tearDown(ITestResult result) {
+        if (result.getStatus() == ITestResult.FAILURE) {
+            AllureUtils.takeScreenshot(DriverManager.getDriver());
+        }
+        DriverManager.quitDriver();
     }
 
     protected LoginPage getLoginPage() {
