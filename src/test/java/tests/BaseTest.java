@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -22,6 +23,11 @@ public class BaseTest {
 
     @Parameters ({"browser"})
     @BeforeMethod (alwaysRun = true, description = "Настройки для драйвера")
+    @Description("Инициализация драйвера + опции")
+    @Epic("E2E")
+    @Story("Инициализация + опции")
+    @Severity(SeverityLevel.CRITICAL)
+    @Owner("Вейт Владимир")
     public void setUP(@Optional("chrome") String browser) {
         if(browser.equalsIgnoreCase("chrome")) {
             ChromeOptions options = new ChromeOptions();
@@ -74,7 +80,11 @@ public class BaseTest {
     protected CartPage getCartPage() {
         return cartPage.get();
     }
-
+    @Description("Закрытие браузера")
+    @Epic("E2E")
+    @Story("Выход из браузера")
+    @Severity(SeverityLevel.CRITICAL)
+    @Owner("Вейт Владимир")
     public void loginGood() {
         getLoginPage().open();
         getLoginPage().login("standard_user", "secret_sauce");
