@@ -3,6 +3,8 @@ package tests;
 import io.qameta.allure.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import utils.AllureUtils;
+import utils.DriverManager;
 
 public class ProductTest extends BaseTest{
 

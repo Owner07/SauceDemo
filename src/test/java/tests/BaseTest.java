@@ -1,7 +1,6 @@
 package tests;
 
 import io.qameta.allure.*;
-import io.qameta.allure.testng.AllureTestNg;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -18,9 +17,9 @@ import utils.TestListener;
 
 import java.util.HashMap;
 
-@Listeners({TestListener.class, AllureTestNg.class})
+@Listeners({TestListener.class})
 public class BaseTest {
-    // каждый поток имеет будет брать экземпляр LoginPage
+    // каждый поток будет брать экземпляр страницы
     private ThreadLocal<LoginPage> loginPage = new ThreadLocal<>();
     private ThreadLocal<ProductsPage> productsPage = new ThreadLocal<>();
     private ThreadLocal<CartPage> cartPage = new ThreadLocal<>();
@@ -60,7 +59,7 @@ public class BaseTest {
             options1.addArguments("--disable-notifications");
             options1.addArguments("--disable-popup-blocking");
             options1.addArguments("--disable-infobars");
-            EdgeDriver driver1 = new EdgeDriver();
+            EdgeDriver driver1 = new EdgeDriver(options1);
             DriverManager.setDriver(driver1);
             // создаем page objects и сохраняем в ThreadLocal
             loginPage.set(new LoginPage(driver1));
