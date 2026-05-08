@@ -1,6 +1,7 @@
 package tests;
 
 import io.qameta.allure.*;
+import io.qameta.allure.testng.AllureTestNg;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -17,7 +18,7 @@ import utils.TestListener;
 
 import java.util.HashMap;
 
-@Listeners({TestListener.class})
+@Listeners({TestListener.class, AllureTestNg.class})
 public class BaseTest {
     // каждый поток будет брать экземпляр страницы
     private ThreadLocal<LoginPage> loginPage = new ThreadLocal<>();
@@ -69,11 +70,13 @@ public class BaseTest {
         }
     }
 
+    @Description("Выход из драйвера")
+    @Epic("E2E")
+    @Story("Закрытие драйвера")
+    @Severity(SeverityLevel.CRITICAL)
+    @Owner("Вейт Владимир")
     @AfterMethod(alwaysRun = true, description = "Обязательное закрытие драйвера")
     public void tearDown(ITestResult result) {
-        if (result.getStatus() == ITestResult.FAILURE) {
-            AllureUtils.takeScreenshot(DriverManager.getDriver());
-        }
         DriverManager.quitDriver();
     }
 
