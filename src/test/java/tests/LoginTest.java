@@ -1,12 +1,16 @@
 package tests;
 
 import io.qameta.allure.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
 
 public class LoginTest extends BaseTest{
+
+    private static final Logger log = LoggerFactory.getLogger(LoginTest.class);
 
     @Test(testName = "Позитивный логин",
             invocationCount = 3,
@@ -24,6 +28,10 @@ public class LoginTest extends BaseTest{
         getLoginPage().open();
         getLoginPage().login("standard_user","secret_sauce");
         assertEquals(getProductsPage().getTitle(),"Products");
+    }
+    @Test
+    public void logg() {
+        getLoginPage().login2();
     }
 
     @DataProvider(name = "Тестовые данные для негативного логина", indices = {0, 2})

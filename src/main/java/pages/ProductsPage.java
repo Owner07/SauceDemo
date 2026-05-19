@@ -45,8 +45,9 @@ public class ProductsPage extends BasePage{
     }
 
     @Step ("Нажатие на кнопку добавить продукт")
-    public void clicklButtonAdd() {
+    public ProductsPage clicklButtonAdd() {
         driver.findElement(BUTTON_ADD).click();
+        return this;
     }
 
     public String buttonDel() {
@@ -54,14 +55,16 @@ public class ProductsPage extends BasePage{
     }
 
     @Step ("Нажатие на кнопку удалить продукт")
-    public void clicklButtomDel() {
+    public ProductsPage clicklButtomDel() {
         driver.findElement(BUTTON_DEL).click();
+        return this;
     }
 
     @Step ("Добавление продукта с номером: '{i}'")
-    public void addProduct(int i) {
+    public ProductsPage addProduct(int i) {
         List<WebElement> items = driver.findElements(BUTTON_ADD_PAGE);
         items.get(i).click();
+        return this;
     }
 
     @Step ("Сравнение количества продуктов в корзине")
@@ -71,8 +74,9 @@ public class ProductsPage extends BasePage{
     }
 
     @Step ("Переход со страницы продуктов в корзину")
-    public void clickBadge() {
+    public CartPage clickBadge() {
         driver.findElement(BADGE).click();
+        return new CartPage(driver);
     }
 
     public String getButtonBackBadge() {
@@ -80,7 +84,8 @@ public class ProductsPage extends BasePage{
     }
 
     @Step ("Удаление продукта из корзины")
-    public void delProduct() {
+    public CartPage delProduct() {
         driver.findElement(BUTTON_DEL).click();
+        return new CartPage(driver);
     }
 }

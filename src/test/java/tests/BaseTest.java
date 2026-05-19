@@ -16,6 +16,7 @@ import utils.AllureUtils;
 import utils.DriverManager;
 import utils.TestListener;
 
+import java.util.Collections;
 import java.util.HashMap;
 
 @Listeners({TestListener.class, AllureTestNg.class})
@@ -39,6 +40,10 @@ public class BaseTest {
             chromePrefs.put("credentials_enable_service", false);
             chromePrefs.put("profile.password_manager_enabled", false);
             options.setExperimentalOption("prefs", chromePrefs);
+            options.addArguments("--incognito");
+            options.addArguments("--disable-blink-features=AutomationControlled");
+            options.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
+            options.setExperimentalOption("useAutomationExtension", false);
             options.addArguments("--incognito");
             options.addArguments("--disable-notifications");
             options.addArguments("--disable-popup-blocking");
@@ -75,10 +80,10 @@ public class BaseTest {
     @Story("Закрытие драйвера")
     @Severity(SeverityLevel.CRITICAL)
     @Owner("Вейт Владимир")
-    @AfterMethod(alwaysRun = true, description = "Обязательное закрытие драйвера")
-    public void tearDown(ITestResult result) {
-        DriverManager.quitDriver();
-    }
+//    @AfterMethod(alwaysRun = true, description = "Обязательное закрытие драйвера")
+//    public void tearDown(ITestResult result) {
+//        DriverManager.quitDriver();
+//    }
 
     protected LoginPage getLoginPage() {
         return loginPage.get();

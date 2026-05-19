@@ -35,8 +35,9 @@ public class CartPage extends BasePage{
     }
 
     @Step ("Переход на страницу чекаута")
-    public void clickCheckout() {
+    public CartPage clickCheckout() {
         driver.findElement(BUTTON_CHEKOUT).click();
+        return this;
     }
 
     public String getCheckoutTitle() {
@@ -44,19 +45,22 @@ public class CartPage extends BasePage{
     }
 
     @Step ("Переход на страницу корзины")
-    public void clickBackToCart() {
+    public CartPage clickBackToCart() {
         driver.findElement(BUTTON_BACK_IN_BADGE).click();
+        return this;
     }
 
     @Step ("Переход на продукт из корзины под номером '{i}'")
-    public void clickProductToCart(int i) {
+    public CartPage clickProductToCart(int i) {
         List<WebElement> items = driver.findElements(PRODUCT);
         items.get(i).click();
+        return this;
     }
 
     @Step ("Удаление продукта")
-    public void delProduct() {
+    public CartPage delProduct() {
         driver.findElement(BUTTON_DEL).click();
+        return this;
     }
 
     public String checkBadge() {
