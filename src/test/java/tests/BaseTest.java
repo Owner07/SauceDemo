@@ -96,21 +96,24 @@ public class BaseTest {
     protected CartPage getCartPage() {
         return cartPage.get();
     }
-    @Description("Закрытие браузера")
+    @Description("Удачный логин")
     @Epic("E2E")
     @Story("Выход из браузера")
     @Severity(SeverityLevel.CRITICAL)
     @Owner("Вейт Владимир")
-    public void loginGood() {
+    public ProductsPage loginGood() {
         getLoginPage().open();
         getLoginPage().login("standard_user", "secret_sauce");
+        return new ProductsPage(DriverManager.getDriver());
     }
 
-    public void inCart() {
+    public CartPage inCart() {
         getProductsPage().clickBadge();
+        return new CartPage(DriverManager.getDriver());
     }
 
-    public void addProdBase() {
+    public ProductsPage addProdBase() {
         getProductsPage().clicklButtonAdd();
+        return new ProductsPage(DriverManager.getDriver());
     }
 }

@@ -49,8 +49,9 @@ public class ProductTest extends BaseTest{
     @Test (testName = "Страница продукта номер 2"
             ,description = "Успешный логин и проверка что находимся на странице продукта")
     public void clickToProducts() {
-        loginGood();
-        getProductsPage().clickProduct(1);
+
+        loginGood()
+                .clickProduct(1);
         Assert.assertEquals(getProductsPage().buttonBackToProduct(),"Back to products");
     }
 
@@ -65,9 +66,9 @@ public class ProductTest extends BaseTest{
     @Issue("NL-B")
     @Owner("Вейт Владимир")
     public void addProduct() {
-    loginGood();
-    getProductsPage().clickProduct(2);
-    getProductsPage().clicklButtonAdd();
+    loginGood()
+    .clickProduct(2)
+    .clicklButtonAdd();
     Assert.assertEquals(getProductsPage().buttonDel(),"Remove");
     }
 
@@ -82,10 +83,10 @@ public class ProductTest extends BaseTest{
     @Issue("NL-B")
     @Owner("Вейт Владимир")
     public void delProduct() {
-        loginGood();
-        getProductsPage().clickProduct(4);
-        getProductsPage().clicklButtonAdd();
-        getProductsPage().clicklButtomDel();
+        loginGood()
+        .clickProduct(4)
+        .clicklButtonAdd()
+        .clicklButtomDel();
         Assert.assertEquals(getProductsPage().buttonAdd(),"Add to cart");
     }
 
@@ -100,8 +101,8 @@ public class ProductTest extends BaseTest{
     @Issue("NL-B")
     @Owner("Вейт Владимир")
     public void clickToBadge() {
-        loginGood();
-        getProductsPage().clickBadge();
+        loginGood()
+        .clickBadge();
         Assert.assertEquals(getProductsPage().getButtonBackBadge(),"Continue Shopping");
     }
 
@@ -116,10 +117,10 @@ public class ProductTest extends BaseTest{
     @Issue("NL-B")
     @Owner("Вейт Владимир")
     public void getCountBadges() {
-        loginGood();
-        getProductsPage().addProduct(1);
-        getProductsPage().addProduct(2);
-        getProductsPage().addProduct(0);
+        loginGood()
+        .addProduct(1)
+        .addProduct(2)
+        .addProduct(0);
         getCartPage().delProduct();
         Assert.assertEquals(getProductsPage().getCountBadge(),"2");
     }

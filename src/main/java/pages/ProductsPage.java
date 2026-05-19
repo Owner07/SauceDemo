@@ -31,9 +31,10 @@ public class ProductsPage extends BasePage{
     }
 
     @Step ("Нахождение продукта и переход на него")
-    public void clickProduct(int i) {
+    public ProductsPage clickProduct(int i) {
         List<WebElement> items = driver.findElements(PRODUCT);
         items.get(i).click();
+        return this;
     }
 
     public String buttonBackToProduct() {
