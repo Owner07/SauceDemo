@@ -1,12 +1,14 @@
 package pages;
 
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
+@Log4j2
 public class CartPage extends BasePage{
 
     private final By BUTTON_CHEKOUT = By.cssSelector("[id='checkout']");
@@ -36,6 +38,7 @@ public class CartPage extends BasePage{
 
     @Step ("Переход на страницу чекаута")
     public CartPage clickCheckout() {
+        log.info("Transition in page checkout");
         driver.findElement(BUTTON_CHEKOUT).click();
         return this;
     }
@@ -46,12 +49,14 @@ public class CartPage extends BasePage{
 
     @Step ("Переход на страницу корзины")
     public CartPage clickBackToCart() {
+        log.info("Transition in page cart");
         driver.findElement(BUTTON_BACK_IN_BADGE).click();
         return this;
     }
 
     @Step ("Переход на продукт из корзины под номером '{i}'")
     public CartPage clickProductToCart(int i) {
+        log.info("Transition in page products in '{}'", i);
         List<WebElement> items = driver.findElements(PRODUCT);
         items.get(i).click();
         return this;
@@ -59,6 +64,7 @@ public class CartPage extends BasePage{
 
     @Step ("Удаление продукта")
     public CartPage delProduct() {
+        log.info("Deleted product");
         driver.findElement(BUTTON_DEL).click();
         return this;
     }
