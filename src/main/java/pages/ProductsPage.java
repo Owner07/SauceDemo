@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -29,6 +30,7 @@ public class ProductsPage extends BasePage{
     return driver.findElements(PRODUCT).size();
     }
 
+    @Step ("Нахождение продукта и переход на него")
     public void clickProduct(int i) {
         List<WebElement> items = driver.findElements(PRODUCT);
         items.get(i).click();
@@ -37,10 +39,12 @@ public class ProductsPage extends BasePage{
     public String buttonBackToProduct() {
         return driver.findElement(BUTTON_BACK).getText();
     }
+
     public String buttonAdd() {
         return driver.findElement(BUTTON_ADD).getText();
     }
 
+    @Step ("Нажатие на кнопку добавить продукт")
     public void clicklButtonAdd() {
         driver.findElement(BUTTON_ADD).click();
     }
@@ -49,20 +53,24 @@ public class ProductsPage extends BasePage{
         return driver.findElement(BUTTON_DEL).getText();
     }
 
+    @Step ("Нажатие на кнопку удалить продукт")
     public void clicklButtomDel() {
         driver.findElement(BUTTON_DEL).click();
     }
 
+    @Step ("Добавление продукта с номером: '{i}'")
     public void addProduct(int i) {
         List<WebElement> items = driver.findElements(BUTTON_ADD_PAGE);
         items.get(i).click();
     }
 
+    @Step ("Сравнение количества продуктов в корзине")
     public String getCountBadge(){
         WebElement badge = driver.findElement(BADGE);
         return badge.isDisplayed() ? badge.getText() : "0";
     }
 
+    @Step ("Переход со страницы продуктов в корзину")
     public void clickBadge() {
         driver.findElement(BADGE).click();
     }
@@ -71,6 +79,7 @@ public class ProductsPage extends BasePage{
         return driver.findElement(BUTTON_BACK_IN_BADGE).getText();
     }
 
+    @Step ("Удаление продукта из корзины")
     public void delProduct() {
         driver.findElement(BUTTON_DEL).click();
     }

@@ -1,56 +1,111 @@
 package tests;
 
-import org.openqa.selenium.WebDriver;
+import io.qameta.allure.*;
+import io.qameta.allure.testng.AllureTestNg;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.asserts.SoftAssert;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
+import org.testng.ITestContext;
+import org.testng.ITestResult;
+import org.testng.annotations.*;
 import pages.CartPage;
 import pages.LoginPage;
 import pages.ProductsPage;
+import utils.AllureUtils;
+import utils.DriverManager;
+import utils.TestListener;
 
 import java.util.HashMap;
 
+@Listeners({TestListener.class, AllureTestNg.class})
 public class BaseTest {
+    // каждый поток будет брать экземпляр страницы
+    private ThreadLocal<LoginPage> loginPage = new ThreadLocal<>();
+    private ThreadLocal<ProductsPage> productsPage = new ThreadLocal<>();
+    private ThreadLocal<CartPage> cartPage = new ThreadLocal<>();
 
-    WebDriver driver;
-    LoginPage loginPage;
-    ProductsPage productsPage;
-    CartPage cartPage;
-
-    @BeforeMethod
-    public void setUP(){
-        ChromeOptions options = new ChromeOptions();
-        HashMap<String, Object> chromePrefs = new HashMap<>();
-        chromePrefs.put("credentials_enable_service", false);
-        chromePrefs.put("profile.password_manager_enabled", false);
-        options.setExperimentalOption("prefs", chromePrefs);
-        options.addArguments("--incognito");
-        options.addArguments("--disable-notifications");
-        options.addArguments("--disable-popup-blocking");
-        options.addArguments("--disable-infobars");
-        driver = new ChromeDriver(options);
-        loginPage = new LoginPage(driver);
-        productsPage = new ProductsPage(driver);
-        cartPage = new CartPage(driver);
+    @Parameters ({"browser"})
+    @BeforeMethod (alwaysRun = true, description = "Настройки для драйвера")
+    @Description("Инициализация драйвера + опции")
+    @Epic("E2E")
+    @Story("Инициализация + опции")
+    @Severity(SeverityLevel.CRITICAL)
+    @Owner("Вейт Владимир")
+    public void setUP(@Optional("chrome") String browser, ITestContext iTestContext) {
+        if(browser.equalsIgnoreCase("chrome")) {
+            ChromeOptions options = new ChromeOptions();
+            HashMap<String, Object> chromePrefs = new HashMap<>();
+            chromePrefs.put("credentials_enable_service", false);
+            chromePrefs.put("profile.password_manager_enabled", false);
+            options.setExperimentalOption("prefs", chromePrefs);
+            options.addArguments("--incognito");
+            options.addArguments("--disable-notifications");
+            options.addArguments("--disable-popup-blocking");
+            options.addArguments("--disable-infobars");
+            ChromeDriver driver = new ChromeDriver(options);
+            DriverManager.setDriver(driver);
+            // создаем page objects и сохраняем в ThreadLocal
+            loginPage.set(new LoginPage(driver));
+            productsPage.set(new ProductsPage(driver));
+            cartPage.set(new CartPage(driver));
+            iTestContext.setAttribute("driver", driver);
+        } else if (browser.equalsIgnoreCase("edge")) {
+            EdgeOptions options1 = new EdgeOptions();
+            HashMap<String, Object> edgePrefs = new HashMap<>();
+            edgePrefs.put("credentials_enable_service", false);
+            edgePrefs.put("profile.password_manager_enabled", false);
+            options1.setExperimentalOption("prefs", edgePrefs);
+            options1.addArguments("--incognito");
+            options1.addArguments("--disable-notifications");
+            options1.addArguments("--disable-popup-blocking");
+            options1.addArguments("--disable-infobars");
+            EdgeDriver driver1 = new EdgeDriver(options1);
+            DriverManager.setDriver(driver1);
+            // создаем page objects и сохраняем в ThreadLocal
+            loginPage.set(new LoginPage(driver1));
+            productsPage.set(new ProductsPage(driver1));
+            cartPage.set(new CartPage(driver1));
+            iTestContext.setAttribute("driver", driver1);
+        }
     }
 
+    @Description("Выход из драйвера")
+    @Epic("E2E")
+    @Story("Закрытие драйвера")
+    @Severity(SeverityLevel.CRITICAL)
+    @Owner("Вейт Владимир")
+    @AfterMethod(alwaysRun = true, description = "Обязательное закрытие драйвера")
+    public void tearDown(ITestResult result) {
+        DriverManager.quitDriver();
+    }
+
+    protected LoginPage getLoginPage() {
+        return loginPage.get();
+    }
+
+    protected ProductsPage getProductsPage() {
+        return productsPage.get();
+    }
+
+    protected CartPage getCartPage() {
+        return cartPage.get();
+    }
+    @Description("Закрытие браузера")
+    @Epic("E2E")
+    @Story("Выход из браузера")
+    @Severity(SeverityLevel.CRITICAL)
+    @Owner("Вейт Владимир")
     public void loginGood() {
-        loginPage.open();
-        loginPage.login("standard_user","secret_sauce");
+        getLoginPage().open();
+        getLoginPage().login("standard_user", "secret_sauce");
     }
 
     public void inCart() {
-        productsPage.clickBadge();
+        getProductsPage().clickBadge();
     }
 
     public void addProdBase() {
-        productsPage.clicklButtonAdd();
-    }
-
-    @AfterMethod (alwaysRun = true)
-    public void tearDown() {
-        driver.quit();
+        getProductsPage().clicklButtonAdd();
     }
 }
