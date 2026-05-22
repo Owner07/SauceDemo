@@ -34,8 +34,8 @@ public class CartTest extends BaseTest{
     @Owner("Вейт Владимир")
     public void checkCkeck() {
         loginGood();
-        inCart();
-        getCartPage().clickCheckout();
+        inCart()
+        .clickCheckout();
         Assert.assertEquals(getCartPage().getCheckoutTitle(), "Checkout: Your Information");
     }
 
@@ -51,8 +51,8 @@ public class CartTest extends BaseTest{
     @Owner("Вейт Владимир")
     public void checkButtonBackToProduct() {
         loginGood();
-        inCart();
-        getCartPage().clickBackToCart();
+        inCart()
+        .clickBackToCart();
         Assert.assertEquals(getCartPage().getTitleProduct(), "Products");
     }
 
@@ -71,8 +71,8 @@ public class CartTest extends BaseTest{
         loginGood();
         addProdBase();
         addProdBase();
-        inCart();
-        getCartPage().clickProductToCart(1);
+        inCart()
+        .clickProductToCart(1);
         Assert.assertEquals(getCartPage().getTitleToPageProduct(),"Sauce Labs Bike Light");
     }
 
@@ -91,8 +91,8 @@ public class CartTest extends BaseTest{
         loginGood();
         addProdBase();
         addProdBase();
-        inCart();
-        getCartPage().delProduct();
+        inCart()
+        .delProduct();
         Assert.assertEquals(getCartPage().checkBadge(),"1");
     }
 }

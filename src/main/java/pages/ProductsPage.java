@@ -1,12 +1,14 @@
 package pages;
 
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
+@Log4j2
 public class ProductsPage extends BasePage{
 
     private final By TITLE = By.cssSelector("[data-test=title]");
@@ -31,9 +33,11 @@ public class ProductsPage extends BasePage{
     }
 
     @Step ("Нахождение продукта и переход на него")
-    public void clickProduct(int i) {
+    public ProductsPage clickProduct(int i) {
+        log.info("Finding and adding product number '{}'", i);
         List<WebElement> items = driver.findElements(PRODUCT);
         items.get(i).click();
+        return this;
     }
 
     public String buttonBackToProduct() {
@@ -45,8 +49,10 @@ public class ProductsPage extends BasePage{
     }
 
     @Step ("Нажатие на кнопку добавить продукт")
-    public void clicklButtonAdd() {
+    public ProductsPage clicklButtonAdd() {
+        log.info("Adding product");
         driver.findElement(BUTTON_ADD).click();
+        return this;
     }
 
     public String buttonDel() {
@@ -54,25 +60,32 @@ public class ProductsPage extends BasePage{
     }
 
     @Step ("Нажатие на кнопку удалить продукт")
-    public void clicklButtomDel() {
+    public ProductsPage clicklButtomDel() {
+        log.info("Deleted product");
         driver.findElement(BUTTON_DEL).click();
+        return this;
     }
 
     @Step ("Добавление продукта с номером: '{i}'")
-    public void addProduct(int i) {
+    public ProductsPage addProduct(int i) {
+        log.info("Adding product in number '{}'", i);
         List<WebElement> items = driver.findElements(BUTTON_ADD_PAGE);
         items.get(i).click();
+        return this;
     }
 
     @Step ("Сравнение количества продуктов в корзине")
     public String getCountBadge(){
+        log.info("Comparison quantity product in cart");
         WebElement badge = driver.findElement(BADGE);
         return badge.isDisplayed() ? badge.getText() : "0";
     }
 
     @Step ("Переход со страницы продуктов в корзину")
-    public void clickBadge() {
+    public CartPage clickBadge() {
+        log.info("Transition page in cart");
         driver.findElement(BADGE).click();
+        return new CartPage(driver);
     }
 
     public String getButtonBackBadge() {
@@ -80,7 +93,9 @@ public class ProductsPage extends BasePage{
     }
 
     @Step ("Удаление продукта из корзины")
-    public void delProduct() {
+    public CartPage delProduct() {
+        log.info("Deleted products in cart");
         driver.findElement(BUTTON_DEL).click();
+        return new CartPage(driver);
     }
 }
