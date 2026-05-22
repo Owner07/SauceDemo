@@ -2,6 +2,7 @@ package tests;
 
 import io.qameta.allure.*;
 import io.qameta.allure.testng.AllureTestNg;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -19,6 +20,7 @@ import utils.TestListener;
 import java.util.Collections;
 import java.util.HashMap;
 
+@Log4j2
 @Listeners({TestListener.class, AllureTestNg.class})
 public class BaseTest {
     // каждый поток будет брать экземпляр страницы
@@ -34,6 +36,7 @@ public class BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Owner("Вейт Владимир")
     public void setUP(@Optional("chrome") String browser, ITestContext iTestContext) {
+        log.info("Initialization browser");
         if(browser.equalsIgnoreCase("chrome")) {
             ChromeOptions options = new ChromeOptions();
             HashMap<String, Object> chromePrefs = new HashMap<>();
@@ -82,6 +85,7 @@ public class BaseTest {
     @Owner("Вейт Владимир")
 //    @AfterMethod(alwaysRun = true, description = "Обязательное закрытие драйвера")
 //    public void tearDown(ITestResult result) {
+//        log.info("Closed browser");
 //        DriverManager.quitDriver();
 //    }
 
@@ -102,17 +106,20 @@ public class BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Owner("Вейт Владимир")
     public ProductsPage loginGood() {
+        log.info("Opening browser");
         getLoginPage().open();
         getLoginPage().login("standard_user", "secret_sauce");
         return new ProductsPage(DriverManager.getDriver());
     }
 
     public CartPage inCart() {
+        log.info("Opening page in cart");
         getProductsPage().clickBadge();
         return new CartPage(DriverManager.getDriver());
     }
 
     public ProductsPage addProdBase() {
+        log.info("Adding products in cart");
         getProductsPage().clicklButtonAdd();
         return new ProductsPage(DriverManager.getDriver());
     }

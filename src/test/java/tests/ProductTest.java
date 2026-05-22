@@ -20,7 +20,7 @@ public class ProductTest extends BaseTest{
     @Owner("Вейт Владимир")
     public void checkPage(){
         loginGood();
-        Assert.assertEquals(getProductsPage().getTitle(),"Productsee");
+        Assert.assertEquals(getProductsPage().getTitle(),"Products");
     }
 
     @Test (testName = "Количество продуктов"

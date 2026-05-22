@@ -1,9 +1,11 @@
 package tests;
 
 import io.qameta.allure.*;
+import lombok.extern.log4j.Log4j2;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+@Log4j2
 public class CartTest extends BaseTest{
 
     @Test (testName = "Проверка страницы корзины"
@@ -17,6 +19,7 @@ public class CartTest extends BaseTest{
     @Issue("NL-B")
     @Owner("Вейт Владимир")
     public void cartPageTest() {
+        log.info("Checking cart page");
         loginGood();
         inCart();
         Assert.assertEquals(getCartPage().getTitleCart(), "Your Cart");
@@ -33,6 +36,7 @@ public class CartTest extends BaseTest{
     @Issue("NL-B")
     @Owner("Вейт Владимир")
     public void checkCkeck() {
+        log.info("Checking page cart");
         loginGood();
         inCart()
         .clickCheckout();
@@ -50,6 +54,7 @@ public class CartTest extends BaseTest{
     @Issue("NL-B")
     @Owner("Вейт Владимир")
     public void checkButtonBackToProduct() {
+        log.info("Checking opened page cart in page products");
         loginGood();
         inCart()
         .clickBackToCart();
@@ -68,6 +73,7 @@ public class CartTest extends BaseTest{
     @Issue("NL-B")
     @Owner("Вейт Владимир")
     public void checkClicklProductInCart() {
+        log.info("Login and transition page products and adding products");
         loginGood();
         addProdBase();
         addProdBase();
@@ -88,6 +94,7 @@ public class CartTest extends BaseTest{
     @Issue("NL-B")
     @Owner("Вейт Владимир")
     public void checkDelProduct() {
+        log.info("Login and transition page products and adding products and deleted");
         loginGood();
         addProdBase();
         addProdBase();
