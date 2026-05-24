@@ -10,7 +10,7 @@ public class LocatorTest extends BaseTest{
     description = "Успешный логин + проверка локаторов")
     public void checkLocator() {
         getLoginPage().open();
-        getLoginPage().login("standard_user","secret_sauce");
+        getLoginPage().login(user,password);
         DriverManager.getDriver().findElement(By.cssSelector("[data-test='inventory-item-name']"));
         DriverManager.getDriver().findElement(By.cssSelector("[class~='btn']"));
         DriverManager.getDriver().findElement(By.cssSelector("[id|='add-to-cart']"));

@@ -28,6 +28,9 @@ public class BaseTest {
     private ThreadLocal<ProductsPage> productsPage = new ThreadLocal<>();
     private ThreadLocal<CartPage> cartPage = new ThreadLocal<>();
 
+    protected String user = System.getProperty("user");
+    protected  String password = System.getProperty("password");
+
     @Parameters ({"browser"})
     @BeforeMethod (alwaysRun = true, description = "Настройки для драйвера")
     @Description("Инициализация драйвера + опции")
@@ -110,7 +113,7 @@ public class BaseTest {
     public ProductsPage loginGood() {
         log.info("Opening browser");
         getLoginPage().open();
-        getLoginPage().login("standard_user", "secret_sauce");
+        getLoginPage().login(user, password);
         return new ProductsPage(DriverManager.getDriver());
     }
 
