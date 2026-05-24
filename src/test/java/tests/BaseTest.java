@@ -44,6 +44,7 @@ public class BaseTest {
             chromePrefs.put("profile.password_manager_enabled", false);
             options.setExperimentalOption("prefs", chromePrefs);
             options.addArguments("--incognito");
+            options.addArguments("--headless");
             options.addArguments("--disable-blink-features=AutomationControlled");
             options.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
             options.setExperimentalOption("useAutomationExtension", false);
@@ -65,6 +66,7 @@ public class BaseTest {
             edgePrefs.put("profile.password_manager_enabled", false);
             options1.setExperimentalOption("prefs", edgePrefs);
             options1.addArguments("--incognito");
+            options1.addArguments("--headless");
             options1.addArguments("--disable-notifications");
             options1.addArguments("--disable-popup-blocking");
             options1.addArguments("--disable-infobars");
