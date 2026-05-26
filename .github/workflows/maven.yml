@@ -31,7 +31,7 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
-    - name: Test runs
+    - name: Test run
       run: mvn clean test -Duser=$USER -Dpassword=$PASSWORD
 
     - name: Get Allure history
