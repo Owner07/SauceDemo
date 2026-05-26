@@ -1,0 +1,5 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"Проверка логина с валидными кредами","1355","Логин с валидными кредами","Sauce Demo","Tue May 26 18:12:45 UTC 2026","passed","Tue May 26 18:12:46 UTC 2026","tests.LoginTest","Chrome","tests.LoginTest","checkLoginWithPositive"
+"Проверка логина с не валидными кредами","480","Ввод невалидный значений с помощью метода датапровайдер","Sauce Demo","Tue May 26 18:12:48 UTC 2026","passed","Tue May 26 18:12:48 UTC 2026","tests.LoginTest","Chrome","tests.LoginTest","negativeLogin"
+"Проверка что находимся на странице корзины","0","Успешный логин, переход на страницу корзины и проверка что находимся на страницы корзины","Sauce Demo","Tue May 26 18:19:30 UTC 2026","broken","Tue May 26 18:19:30 UTC 2026","tests.CartTest","Edge","tests.CartTest","cartPageTest"
+"Проверка логина с не валидными кредами","481","Ввод невалидный значений с помощью метода датапровайдер","Sauce Demo","Tue May 26 18:12:47 UTC 2026","passed","Tue May 26 18:12:47 UTC 2026","tests.LoginTest","Chrome","tests.LoginTest","negativeLogin"
