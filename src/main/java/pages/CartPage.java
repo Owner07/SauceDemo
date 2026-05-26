@@ -56,7 +56,7 @@ public class CartPage extends BasePage{
 
     @Step ("Переход на продукт из корзины под номером '{i}'")
     public CartPage clickProductToCart(int i) {
-        log.info("Transition in page products in '{}'", i);
+        log.info("Transition in page products in  '{}'", i);
         List<WebElement> items = driver.findElements(PRODUCT);
         items.get(i).click();
         return this;
